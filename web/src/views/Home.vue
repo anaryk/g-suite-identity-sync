@@ -51,7 +51,7 @@
             <span class="md-error">{{errors.first('password-confirm')}}</span>
           </md-field>
 
-          <md-switch class="md-primary" v-if="showSaveGSuitePasswordCheckbox()" v-model="formData.saveGSuitePassword">
+          <md-switch class="md-primary" ng-disabled="true" v-if="showSaveGSuitePasswordCheckbox()" v-model="formData.saveGSuitePassword">
             {{ $t("message.syncGSuitePassword") }}
           </md-switch>
           <br />
@@ -68,7 +68,7 @@ export default {
   data: () => ({
     accountData: { username: "", name: "", role: "" },
     showProgress: false,
-    formData: { password: "", confirmPassword: "", saveGSuitePassword: false }
+    formData: { password: "", confirmPassword: "", saveGSuitePassword: true }
   }),
   created: function() {
     this.setAccountDetail();
