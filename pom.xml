@@ -3,24 +3,26 @@
 
     <groupId>eu.hlavki.identity</groupId>
     <artifactId>gsync</artifactId>
-    <version>0.4.8-SNAPSHOT</version>
+    <version>0.6.2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <properties>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <cxf.version>3.3.7</cxf.version>
-        <karaf.version>4.2.9</karaf.version>
-        <osgi.version>6.0.0</osgi.version>
-        <unboundid.version>5.1.0</unboundid.version>
-        <guava.version>24.1.1-jre</guava.version>
-        <javax.validation.version>1.1.0.Final</javax.validation.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <cxf.version>3.5.2</cxf.version>
+        <karaf.version>4.3.6</karaf.version>
+        <osgi.version>7.0.0</osgi.version>
+        <unboundid.version>6.0.4</unboundid.version>
+        <guava.version>31.1-jre</guava.version>
+        <validation.api.version>2.0.2</validation.api.version>
         <docker.release.tag>${project.version}</docker.release.tag>
+        <project.scm.id>github</project.scm.id>
     </properties>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com:hlavki/g-suite-identity-sync.git</connection>
+        <connection>scm:git:https://github.com/hlavki/g-suite-identity-sync.git</connection>
         <tag>HEAD</tag>
     </scm>
 
@@ -34,13 +36,10 @@
 
     <distributionManagement>
         <repository>
-            <id>xit-public-releases</id>
-            <url>https://repository.xit.camp/repository/maven-public-releases/</url>
+            <id>github</id>
+            <name>GitHub hlavki Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/hlavki/g-suite-identity-sync</url>
         </repository>
-        <snapshotRepository>
-            <id>xit-public-snapshots</id>
-            <url>https://repository.xit.camp/repository/maven-public-snapshots/</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <dependencyManagement>
@@ -72,7 +71,7 @@
             </dependency>
             <dependency>
                 <groupId>org.osgi</groupId>
-                <artifactId>org.osgi.core</artifactId>
+                <artifactId>osgi.core</artifactId>
                 <version>${osgi.version}</version>
                 <scope>provided</scope>
             </dependency>
@@ -115,7 +114,7 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-api</artifactId>
-                <version>1.7.26</version>
+                <version>1.7.36</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
@@ -131,15 +130,15 @@
                 <scope>provided</scope>
             </dependency>
             <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>${javax.validation.version}</version>
+                <groupId>jakarta.validation</groupId>
+                <artifactId>jakarta.validation-api</artifactId>
+                <version>${validation.api.version}</version>
                 <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
-                <version>1.18.6</version>
+                <version>1.18.20</version>
                 <scope>provided</scope>
             </dependency>
         </dependencies>
@@ -151,7 +150,7 @@
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>5.1.1</version>
+                    <version>5.1.2</version>
                     <inherited>true</inherited>
                     <extensions>true</extensions>
                 </plugin>
@@ -176,7 +175,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
@@ -189,20 +188,19 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
-                    <version>2.5.2</version>
+                    <version>3.0.0-M1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>2.5.3</version>
+                <version>3.0.0-M4</version>
                 <configuration>
                     <preparationGoals>install</preparationGoals>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <releaseProfiles>docker-release</releaseProfiles>
-                    <pushChanges>false</pushChanges>
                     <localCheckout>true</localCheckout>
                 </configuration>
             </plugin>

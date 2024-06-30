@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim
+FROM openjdk:17-jdk-slim
 
 ENV KARAF_USER karaf
 ENV KARAF_UID 8181
@@ -16,6 +16,8 @@ RUN sed -i 's/log4j2.rootLogger.appenderRef.RollingFile/#log4j2.rootLogger.appen
     && sed -i -e '$a log4j2.logger.cxf.level\ =\ WARN' /opt/karaf/etc/org.ops4j.pax.logging.cfg \
     && mkdir -p /opt/karaf/data /opt/karaf/data/log /opt/karaf/etc/identity \
     && chown -R $KARAF_USER.$KARAF_USER /opt/karaf/data /opt/karaf/data/log /opt/karaf/etc/identity
+
+WORKDIR /opt/karaf
 
 USER $KARAF_USER
 

@@ -4,7 +4,7 @@
     <parent>
         <groupId>eu.hlavki.identity</groupId>
         <artifactId>gsync</artifactId>
-        <version>0.4.8-SNAPSHOT</version>
+        <version>0.6.2-SNAPSHOT</version>
     </parent>
     <artifactId>gsync-features</artifactId>
     <packaging>feature</packaging>
@@ -31,7 +31,7 @@
                         <descriptor>mvn:org.apache.karaf.features/standard/${karaf.version}/xml/features</descriptor>
                         <descriptor>file:${project.build.directory}/feature/feature.xml</descriptor>
                     </descriptors>
-                    <javase>11</javase>
+                    <javase>${java.version}</javase>
                     <distribution>org.apache.karaf.features:framework</distribution>
                     <framework>
                         <feature>framework</feature>
